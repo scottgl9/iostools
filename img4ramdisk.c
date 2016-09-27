@@ -18,6 +18,10 @@ int main(int argc, char **argv) {
 
 	printf("Opening %s\n", filename);
 	fin = fopen(filename, "rb");
+	if (!fin) {
+		printf("Error opening %s\n", filename);
+		exit(-1);
+	}
 	fread(buf, 1, 27, fin);
 
 	strcpy(filename, argv[2]);
@@ -41,7 +45,8 @@ int main(int argc, char **argv) {
 	} else if (!strcmp(argv[1], "pack")) {
 	FILE *fin1, *fin2, *fout;
         strcpy(filename, argv[2]);
-        strcat(filename, ".dmg");
+        strcat(filename, ".new.dmg");
+	printf("Creating %s\n", filename);
 
         fout = fopen(filename, "wb");
 
@@ -62,7 +67,6 @@ int main(int argc, char **argv) {
         }
         fclose(fout);
         fclose(fin2);
-
 
 	}
 }
